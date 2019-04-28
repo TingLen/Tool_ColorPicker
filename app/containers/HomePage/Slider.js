@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
+import throttle from 'loadsh/throttle'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { 
+    makeHueOffsetX,
+    makeOpacityOffsetX} from './state/selectors'
+import {
+    updateHueOffsetX,
+    updateOpacityOffsetX} from './state/actions'
 
 import SliderHandle from './SliderHandle'
 
@@ -20,14 +29,66 @@ const SliderColor = styled.div`
 `
 
 class Slider extends Component {
+    constructor(){
+        super()
+        this.throttle = throttle((fn,e) => {
+            fn(e)
+        },10)
+    }
+
+    handleMouseDown = (e) => {
+        this.handleChange(e.nativeEvent)
+        window.addEventListener('mousemove',this.handleChange)
+        window.addEventListener('mouseup',this.handleMouseUp)
+    }
+
+    handleMouseMove = e => {
+        this.handleChange(e)
+    }
+
+    onChange = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if(this.node === e.target){
+            let offsetX = e.offsetX
+            if(this.props.type === 'hue') this.props.changeHueValue(offsetX - 6)
+            if(this.props.type === 'opacity') this.props.changeOpactityValue(offsetX - 6)
+        }
+        
+    }
+
+    handleChange = (e) => {
+        this.throttle(this.onChange,e)
+    }
+
+    handleMouseUp = (e) => {
+        window.removeEventListener('mousemove',this.handleChange)
+        window.removeEventListener('mouseup',this.handleMouseUp)
+    }
+
     render() {
         return (
             <Wrapper>
-                <SliderColor />
-                <SliderHandle />
+                <SliderColor
+                 onMouseDown={(e) => this.handleMouseDown(e)}
+                 ref={node => this.node = node} />
+                <SliderHandle handleX={this.props.type === 'hue' ? this.props.hueOffsetX : this.props.opacityOffsetX}/>
             </Wrapper>
         );
     }
 }
 
-export default Slider
+const mapStateToProps = createStructuredSelector({
+    hueOffsetX: makeHueOffsetX(),
+    opacityOffsetX: makeOpacityOffsetX()
+})
+
+const mapDispatchToProps = dispatch => ({
+    changeHueValue: offsetX => dispatch(updateHueOffsetX(offsetX)),
+    changeOpactityValue: offsetX => dispatch(updateOpacityOffsetX(offsetX)),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Slider)

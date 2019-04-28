@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     padding: 16px;
 `
 
-const LeftContent = styled.div`
+const RightContent = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -22,14 +22,15 @@ const LeftContent = styled.div`
 `
 
 class Sliders extends Component {
+
     render() {
         return (
             <Wrapper>
                 <CurrentCricle />
-                <LeftContent>
-                    <Slider />
-                    <Slider />
-                </LeftContent>
+                <RightContent>
+                    <Slider type='hue'/>
+                    <Slider type='opacity'/>
+                </RightContent>
             </Wrapper>
         );
     }
