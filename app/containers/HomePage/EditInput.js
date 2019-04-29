@@ -33,7 +33,7 @@ class EditInput extends Component {
     render() {
         return (
             <Wrapper>
-                <Input value={this.props.value}/>
+                <Input value={this.props.value} readOnly/>
                 <Lable>
                     {this.props.name}
                 </Lable>
