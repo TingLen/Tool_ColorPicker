@@ -15,7 +15,7 @@ class SwitchButton extends Component {
     render() {
         return (
             <Wrapper>
-                <svg width='40px' height='40px'>
+                <svg width='40px' height='40px' onClick={this.props.handleChange}>
                     <image xlinkHref={switchIcon} width='40px' height='40px' />
                 </svg>
             </Wrapper>            

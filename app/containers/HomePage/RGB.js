@@ -14,9 +14,10 @@ class RGB extends Component {
     render() {
         return (
             <Wrapper>
-                <EditInput />
-                <EditInput />
-                <EditInput />
+                <EditInput name='r'/>
+                <EditInput name='g'/>
+                <EditInput name='b'/>
+                <EditInput name='a'/>
             </Wrapper>
         )
     }

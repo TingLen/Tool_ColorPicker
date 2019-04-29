@@ -13,7 +13,7 @@ class HEX extends Component {
     render() {
         return (
             <Wrapper>
-                <EditInput />
+                <EditInput name='hex'/>
             </Wrapper>
         )
     }

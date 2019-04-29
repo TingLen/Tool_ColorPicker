@@ -17,13 +17,24 @@ const Wrapper = styled.div`
 `
 
 class Values extends Component {
+
+
+    choseType = () => {
+        switch (this.props.valueType) {
+            case 0:
+                return (<RGB />)
+            case 1:
+                return (<HEX />)
+            case 2:
+                return (<HSL />)
+        }
+    }
+
     render() {
         return (
             <Wrapper>
-                {/* <RGB /> */}
-                {/* <HEX /> */}
-                <HSL />
-                <SwitchButton />
+                {this.choseType()}
+                <SwitchButton handleChange={this.props.changeType}/>
             </Wrapper>
         );
     }

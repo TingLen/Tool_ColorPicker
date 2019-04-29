@@ -35,7 +35,7 @@ class EditInput extends Component {
             <Wrapper>
                 <Input />
                 <Lable>
-                    s
+                    {this.props.name}
                 </Lable>
             </Wrapper>
         )

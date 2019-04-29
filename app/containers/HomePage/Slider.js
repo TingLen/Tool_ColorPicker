@@ -37,7 +37,7 @@ class Slider extends Component {
     }
 
     handleMouseDown = (e) => {
-        this.handleChange(e.nativeEvent)
+        this.handleChange(e.nativeEvent) 
         window.addEventListener('mousemove',this.handleChange)
         window.addEventListener('mouseup',this.handleMouseUp)
     }

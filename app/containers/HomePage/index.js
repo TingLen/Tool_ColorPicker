@@ -5,10 +5,14 @@
  *
  */
 
-import React from 'react'
+import React,{Component} from 'react'
 import Saturation from './Saturation'
 import Sliders from './Sliders'
 import Values from './Values'
+import {connect} from 'react-redux'
+import {changeValueType} from './state/actions'
+import {createStructuredSelector} from 'reselect'
+import {makeValueType} from './state/selectors'
 
 import styled from 'styled-components'
 
@@ -25,12 +29,42 @@ const Wrapper = styled.div`
   background: rgb(255, 255, 255);
 `
 
-export default function HomePage() {
-  return (
-    <Wrapper>
-      <Saturation />
-      <Sliders />
-      <Values />
+class HomePage extends Component {
+
+  handleChangeType = () => {
+    if(this.props.valueType < 2) {
+      this.props.changeType(this.props.valueType + 1)
+    }
+    else{
+      this.props.changeType(0)
+    }
+  }
+
+  render() {
+    return (
+      <Wrapper>
+        <Saturation />
+        <Sliders />
+        <Values
+         valueType={this.props.valueType}
+         changeType={this.handleChangeType}/>
     </Wrapper>
-  );
+    )
+  }
+
 }
+
+const mapStateToProps = createStructuredSelector({
+  valueType: makeValueType()
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeType: type => dispatch(changeValueType(type))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomePage)

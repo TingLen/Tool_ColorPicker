@@ -14,10 +14,10 @@ class HSL extends Component {
     render() {
         return (
             <Wrapper>
-                <EditInput />
-                <EditInput />
-                <EditInput />
-                <EditInput />
+               <EditInput name='h'/>
+               <EditInput name='s'/>
+               <EditInput name='l'/>
+               <EditInput name='a'/>
             </Wrapper>
         )
     }

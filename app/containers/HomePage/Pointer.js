@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 class Pointer extends Component {
     render() {
         return (
-            <Wrapper></Wrapper>
+            <Wrapper style={{transform: `translate(${this.props.position.offsetX - 6}px,${this.props.position.offsetY - 6}px)`}}></Wrapper>
         );
     }
 }

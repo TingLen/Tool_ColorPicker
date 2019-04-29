@@ -5,6 +5,10 @@ const selectHueSlider = state => state.colorPicker.hueSlider || initialState.hue
 
 const selectOpacitySlider = state => state.colorPicker.opacitySlider || initialState.opacitySlider
 
+const selectValues = state => state.colorPicker.value || initialState.value
+
+const selectSaturation = state => state.colorPicker.saturation || initialState.saturation
+
 const makeHueOffsetX = () => createSelector(
     selectHueSlider,
     hueSlider => hueSlider.offsetX
@@ -15,7 +19,19 @@ const makeOpacityOffsetX = () => createSelector(
     opacitySlider => opacitySlider.offsetX
 )
 
+const makeValueType = () => createSelector(
+    selectValues,
+    value => value.type
+)
+
+const makeSaturantionPosition = () => createSelector(
+    selectSaturation,
+    saturation => saturation.position
+)
+
 export {
     makeHueOffsetX,
-    makeOpacityOffsetX
+    makeOpacityOffsetX,
+    makeValueType,
+    makeSaturantionPosition
 }
