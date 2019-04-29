@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-    width: 60px;
+    width: 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -33,7 +33,7 @@ class EditInput extends Component {
     render() {
         return (
             <Wrapper>
-                <Input />
+                <Input value={this.props.value}/>
                 <Lable>
                     {this.props.name}
                 </Lable>

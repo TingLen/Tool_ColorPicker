@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import EditInput from './EditInput'
 
+import {connect} from 'react-redux'
+import {
+    makeColorHex,
+    makeOpacityValue} from './state/selectors'
+import {createStructuredSelector} from 'reselect'
+
 const Wrapper = styled.div`
     width: 100%;
     display: flex;
@@ -13,10 +19,16 @@ class HEX extends Component {
     render() {
         return (
             <Wrapper>
-                <EditInput name='hex'/>
+                <EditInput value={this.props.hex} name='hex'/>
             </Wrapper>
         )
     }
 }
 
-export default HEX
+const mapStateToProps = createStructuredSelector({
+    hex: makeColorHex()
+})
+
+export default connect(
+    mapStateToProps
+)(HEX)
